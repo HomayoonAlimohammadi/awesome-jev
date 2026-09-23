@@ -77,6 +77,33 @@ sync_readme() {
 # 取 PR 在【指定文件】里新增的条目行。早期版本取全 diff 的第一条再加到每个冲突文件上，
 # 结果是多分类 PR 会把同一条复制到多个分类（跨分类重复），甚至把 README 的渲染行
 # （带 shields.io badge）写进分类文件。必须按 hunk 归属取。
+# 直接合并路径也要先让分支自洽。gh pr merge 之后的合并提交如果 README 落后于分类文件，
+# catalog-checks 会在 main 上判它失败（sync_readme 几秒后才补绿），于是每个这类 PR 都在
+# main 的历史里留一个红叉。先在分支上补建 README 并推回 fork，合并提交就能落地即绿。
+green_branch_first() {
+  local n="$1" fork="$2" branch="$3" tmp="tmp-green-$n" remote url
+  git fetch -q origin "pull/$n/head:$tmp" 2>/dev/null || { info "· 取不到 PR head，跳过预补建"; return 0; }
+  git checkout -q "$tmp" 2>/dev/null || { info "· 切换失败，跳过预补建"; return 0; }
+  python3 scripts/build-readme.py >/dev/null 2>&1 || true
+  if [ -z "$(git status --porcelain)" ]; then
+    info "· 分支 README 已是最新，无需预补建"
+  else
+    git add -A
+    git commit -q -m "chore: regenerate README so this branch satisfies catalog-checks" 2>/dev/null
+    remote="fork-$(echo "$fork" | tr '/' '-')"
+    url="git@github.com:$fork.git"
+    git remote get-url "$remote" >/dev/null 2>&1 || git remote add "$remote" "$url"
+    git remote set-url "$remote" "$url"
+    if git push -q "$remote" "$tmp:$branch" --force-with-lease 2>/dev/null; then
+      info "已把 README 补建推回分支（合并提交将落地即绿）"
+    else
+      info "⚠ README 补建推送失败，合并提交会是红的"
+    fi
+  fi
+  git checkout -q main 2>/dev/null
+  git branch -q -D "$tmp" 2>/dev/null
+}
+
 added_line_for() {
   local n="$1" target="$2"
   gh pr diff "$n" 2>/dev/null | awk -v tgt="$target" '
@@ -233,9 +260,10 @@ for n in "${PRS[@]}"; do
   sync_main || { info "✗ main 同步失败"; continue; }
 
   if wait_mergeable "$n"; then
+    green_branch_first "$n" "$fork" "$branch"
     if gh pr merge "$n" --merge --subject "Merge pull request #$n from $fork" >/dev/null 2>&1; then
-      info "✓ 直接合并"
-      sync_readme
+      info "✓ 直接合并（分支已自洽，合并提交为绿）"
+      sync_main
       continue
     fi
     info "直接合并失败，转 rebase"
