@@ -64,7 +64,7 @@ Found something wrong? Open an issue or a pull request — **removal is as valid
 - [Classification & Routing](categories/classification-routing.md) — 38 entries
 - [Adaptive & Realtime UI](categories/adaptive-realtime-ui.md) — 8 entries
 - [Verification & Guardrails](categories/verification-guardrails.md) — 32 entries
-- [Scoring & Ranking](categories/scoring-ranking.md) — 29 entries
+- [Scoring & Ranking](categories/scoring-ranking.md) — 30 entries
 - [Agent Decisions](categories/agent-decisions.md) — 48 entries
 - [Data Labeling & Curation](categories/data-labeling-curation.md) — 7 entries
 - [Evaluation & Benchmarking](categories/evaluation-benchmarking.md) — 26 entries
@@ -237,19 +237,16 @@ Source file: [`categories/scoring-ranking.md`](categories/scoring-ranking.md)
 - [Paper Radar](https://github.com/Eliot5566/JEV-Paper-Radar) - Research: scores every new arXiv and bioRxiv paper against plain-English interests with one Noul each and publishes the top picks as a daily page and RSS feed.
 - [Refix](https://refix.ai) - Growth: asks Jev a `Score` over each experiment result to decide whether it clears the promotion bar, and a `Choice` over candidate plays to decide what to run next in SEO, content, and ads.
 - [OpenViking](https://github.com/volcengine/OpenViking) - Reranking: Volcengine's agent context database ships a Jev rerank client that scores each candidate document with `jev-latest` against `api.typesafe.ai` and treats the returned probability as relevance, because TypeSafe exposes no native rerank endpoint.
+- [jevsearch](https://github.com/kylemclaren/jevsearch) - Site search: shadcn/ui command-palette block that streams keyword hits on the first keystroke, then sends the top 20 to Jev in one request (a `Noul` per page on whether the visitor would be glad to land there, a `Choice` for the single best answer, and a `Noul` on whether any page answers at all) and re-orders or drops hits in code, with the repo's own benchmark over the 109-page TypeSafe docs reporting Hit@1 of 83% against 41% for its keyword pass alone.
 
 ### Agent Decisions
 
 Source file: [`categories/agent-decisions.md`](categories/agent-decisions.md)
 
 - [Learn Jev end to end](https://github.com/harshithsunku/learn-jev-end-to-end) - Developer education: a 12-notebook Python course whose hand-rolled agent loop asks Jev a `Choice` (allow / ask / block) with `Noul` irreversibility and exfiltration checks before every tool call, sends ask verdicts to a human and fails closed on errors, and adds a `Choice` model router with a confidence fallback and a `Noul` "am I done?" gate, each measured against labeled fixtures.
-
 - [Hermes JIT Context OS](https://github.com/wojciechwiesner/jit-context) - Coding agents: uses Jev as a sub-millisecond System 1 Epistemic Gate and Domain Router to score AST relevance, test proofs, and tool targets, cutting autonomous agent turns by 31.3% and blind file exploration by 52.6% on SWE-bench with fail-open circuit-breaker resilience.
-
 - [Jev by Example](https://github.com/ReallyArtificial/jev-by-example) - Agent development: runnable JavaScript lessons use Jev Choice, Score, and Noul judgments for memory reconciliation, recovery proposals, and handoff checks, with explicit application policies, offline fixtures, and opt-in live calls.
-
 - [jev-social](https://github.com/socai-io/jev-social) - Social media research: uses a Jev `Choice` at each step to select a concrete socai CLI operation and observed post or profile target on Instagram, TikTok, or LinkedIn, rejecting malformed or low-confidence decisions before execution.
-
 - [Jev Ultrafast](https://github.com/browser-use/jev-ultrafast) - Browser automation: browser-use's ultrafast agent where Jev decides each next action and element to click, calling a language model only when text must be typed.
 - [jev-agent-browser](https://github.com/forvela/jev-agent-browser) - Browser agents: a parent agent delegates bounded tasks to a Jev loop that selects typed browser actions, validates them through agent-browser, and escalates ambiguity or stuck states back to the parent.
 - [pi-typesafe-jev](https://github.com/legacybridge-tech/pi-typesafe-jev) ![agent: Pi](https://img.shields.io/badge/agent-Pi-8250DF?style=flat-square) ![type: plugin](https://img.shields.io/badge/type-plugin-4B5563?style=flat-square) - Coding agents: exposes System One judgments as five Pi tools so a model makes narrow semantic judgments while code and users keep control of thresholds, weights, and actions.
@@ -287,7 +284,6 @@ Source file: [`categories/agent-decisions.md`](categories/agent-decisions.md)
 - [jev-compaction](https://github.com/Waxmell114514/jev-compaction) - Context management: standalone agent context compactor where Jev only scores transcript segments — kept lines stay verbatim, low scorers move to a store behind an expand() pointer instead of being deleted, and the append-only frozen prefix keeps the prompt cache valid; runnable offline demo, no API key needed.
 - [Visual-JEV](https://github.com/jiangxiluning/Visual-Jev) - Multimodal models: Jev-style model built on Qwen3.5-4B that takes images directly, without first converting them to text.
 - [DeepSearcher stopping-policy experiment](https://github.com/zilliztech/deep-searcher/blob/master/evaluation/jev_stopping/README.md) - Agentic search: a standalone evaluation uses Jev Noul judgments on accumulated evidence to decide whether to stop or continue within a search-round budget, comparing stopping behavior, evidence recall, and decision cost.
-
 - [OmniJev](https://github.com/shapsider/OmniJev) - Embodied robotics: a Jev-style finite-choice interface that feeds dual-camera images and text to a self-hosted multimodal model and takes the next preset skill for a MuJoCo arm as one typed choice, where released episodes finish transfer, stack and barrier tasks in 13 decisions and 39 output tokens each, 208/208 non-audio probe requests answer correctly, unobservable inputs come back "insufficient evidence" instead of a guess, and four public benchmark pilots hold accuracy equal to a direct short answer while cutting decision latency 6.8–13.6× and total tokens 51–86% (audio input is wired in the client but rejected by the current backend).
 - [neo4jev](https://github.com/jexp/neo4jev) - Graph navigation: navigates a Neo4j knowledge graph hop-by-hop using Jev Choice over candidate outgoing relationships and Noul to detect goal completion, using beam search over answer log-probabilities.
 - [jev-chat](https://github.com/jev-chat/jev-chat-jarvis) - Messaging: an Android accessibility service reads the conversation in WeChat, QQ, X, or Feishu, asks Jev `Choice` over candidate replies, and fills the draft box while sending stays manual; a Windows port does the same from offline OCR of the WeChat window.
@@ -313,7 +309,6 @@ Source file: [`categories/data-labeling-curation.md`](categories/data-labeling-c
 Source file: [`categories/evaluation-benchmarking.md`](categories/evaluation-benchmarking.md)
 
 - [Jev Web Analyzer](https://github.com/replynodes/jev-web-analyzer) - Product evaluation: analyzes a public SaaS landing page as clean Markdown and asks Jev ten bounded `Choice` questions about first-visit understanding, returning inspectable findings for the first change to make.
-
 - [Jev Playground](https://github.com/hegargarcia/jev-playground) - Model evaluation: benchmarks Jev against Luna, Haiku, and Gemini at choosing validated legal moves in explicit-state games, scoring decision quality and consistency across a sequence of moves.
 - [Jev vs Mistral and Gemini for event validation](https://nearhere.events/blog/typesafe-jev-mistral-gemini-event-validation) - Event discovery: head-to-head test of Jev against Mistral Small and Gemini Flash-Lite at validating local event listings.
 - [jev-research-eval](https://github.com/jgridifier/jev-research-eval) - Research automation: reproducible eval harness plus field note for Jev Ultrafast research-browser tasks, with QC'd cases, a suite runner, and a report generator.
@@ -327,7 +322,6 @@ Source file: [`categories/evaluation-benchmarking.md`](categories/evaluation-ben
 - [minutes](https://github.com/silverstein/minutes) - Meeting notes: local-first transcription app whose live voice path runs its evaluations through Jev.
 - [jev-orderby-bench](https://github.com/yodablocks/jev-orderby-bench) - Model evaluation: measures whether a SQL ORDER BY over a Jev probability is defensible (pairwise inversion, Score ordinality against a human grade, calibration, wording invariants, sort-key ties) under a pre-registered gate that jev-1.13.0 passes on 20 Newsgroups topics and fails four of six conditions on Amazon ESCI product relevance, and shows a DuckDB extension's default 40-row batching fails the ranking gate that one row per request passes.
 - [jev-ood-calibration](https://github.com/scienthoon/jev-ood-calibration) - Model evaluation: independent calibration test of Jev on 900 rule-generated support tickets it cannot have seen plus three public benchmarks, publishing every raw response, ECE against a simulated noise floor, temperature refit, and the per-type sign of miscalibration (Choice and Score overconfident, Boolean underconfident).
-
 - [ASSAY-001](https://github.com/jourdanlabs/assay-001) - Independent pre-registered check of Jev calibration and type safety on Banking77 / CLINC150. Split verdict, full logs. Write-up: [donttrustme.ai](https://donttrustme.ai/assay-001.html)
 - [BTK audit studies](https://boringtoolskit.com/blog/seo-audit-cost-2026/) - Content & growth: Jev striking-distance triage ranks SEO fixes and drives study pages; 1,204 pages judged per run, 4,816 judgments in under 3 minutes, $0.0048 per 12-query batch.
 - [Can Jev Be a Better Agent Evaluator?](https://www.langchain.com/blog/jev-agent-evals-langsmith) - Agent evaluation: LangChain compares Jev against LLM judges on accuracy, repeatability, latency and cost, concluding Jev is the cheaper and more consistent judge for online evals.
