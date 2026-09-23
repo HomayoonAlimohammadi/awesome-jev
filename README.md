@@ -69,7 +69,7 @@ Found something wrong? Open an issue or a pull request — **removal is as valid
 - [Data Labeling & Curation](categories/data-labeling-curation.md) — 7 entries
 - [Evaluation & Benchmarking](categories/evaluation-benchmarking.md) — 27 entries
 - [Calibration & Research](categories/calibration-research.md) — 28 entries
-- [Infra / SDKs / Integrations](categories/infra-sdks-integrations.md) — 71 entries
+- [Infra / SDKs / Integrations](categories/infra-sdks-integrations.md) — 72 entries
 - [Game & Simulation](categories/game-simulation.md) — 19 entries
 - [Finance & Trading](categories/finance-trading.md) — 6 entries
 - [Compliance & Legal](categories/compliance-legal.md) — 1 entry
@@ -445,6 +445,7 @@ Source file: [`categories/infra-sdks-integrations.md`](categories/infra-sdks-int
 - [cu-Jev](https://github.com/dtunai/cu-Jev) - Inference engine: a CUDA-native implementation of the Jev System One API that keeps decisions GPU-resident, shipping a Starfighter demo and a benchmark script.
 - [jevcache](https://github.com/hyperspaceai/jevcache) - Cost control: memoizes Jev-class decisions so a repeated question is served from cache instead of a new call, keeping repeats deterministic and free.
 - [jev-switch](https://github.com/ARCJ137442/jev-switch) ![type: proxy](https://img.shields.io/badge/type-proxy-4B5563?style=flat-square) - Local gateways / cloud relay: dual-mode Rust router for typed Jev decisions — tokenless local multi-upstream routing (Vercel, TypeSafe, local Laya) with noul/boolean translation and DAG failover, or token-gated cloud relay aggregating Jev endpoints behind one API, proven by 155 workspace tests plus end-to-end smoke over Choice/Score/Noul round-trips.
+- [Qwev](https://github.com/HopLee6/Qwev) ![type: self-hosted](https://img.shields.io/badge/type-self--hosted-4B5563?style=flat-square) - Local inference: turns dense Qwen3 and Qwen3.5 checkpoints into a training-free Jev-style `Noul`, `Choice`, and `Score` service that shares one state prefill across isolated questions and, on its included 27-question Qwen3.5-9B/A100 fixture, reports 0.500 s versus 13.554 s for generated JSON.
 
 ### Game & Simulation
 
