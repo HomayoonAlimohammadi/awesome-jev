@@ -64,7 +64,7 @@ Found something wrong? Open an issue or a pull request — **removal is as valid
 - [Classification & Routing](categories/classification-routing.md) — 38 entries
 - [Adaptive & Realtime UI](categories/adaptive-realtime-ui.md) — 8 entries
 - [Verification & Guardrails](categories/verification-guardrails.md) — 32 entries
-- [Scoring & Ranking](categories/scoring-ranking.md) — 30 entries
+- [Scoring & Ranking](categories/scoring-ranking.md) — 31 entries
 - [Agent Decisions](categories/agent-decisions.md) — 48 entries
 - [Data Labeling & Curation](categories/data-labeling-curation.md) — 7 entries
 - [Evaluation & Benchmarking](categories/evaluation-benchmarking.md) — 26 entries
@@ -224,6 +224,7 @@ Source file: [`categories/scoring-ranking.md`](categories/scoring-ranking.md)
 - [jev-skip](https://github.com/valentynkit/jev-skip) ![type: extension](https://img.shields.io/badge/type-extension-4B5563?style=flat-square) - Media: browser extension that reads the YouTube caption track and scores each segment's sponsor probability on the seek bar before the intro ends, reporting 77% of SponsorBlock's sponsor seconds caught over 23 videos at $0.0008 a video.
 - [jev-semgrep](https://github.com/uehaj/jev-semgrep) - Semantic search: greps by meaning across languages, having Jev score every line against a meaning and letting meanings combine with AND, backed by a 13-file test suite.
 - [nlgrep](https://github.com/YehuiTang0316/jev-nlgrep) - Developer tooling: uses Jev `Noul` judgments to find code, docs, logs, and text satisfying natural-language conditions, with a configurable probability threshold and ranked file results linked to source lines.
+- [JevPDF](https://github.com/kylemclaren/jevpdf) - Document search: in-browser PDF viewer that extracts each page's lines locally with pdf.js and asks Jev one `Noul` per line on whether it answers the query (16 lines per request, sharing the page text as state), highlighting lines at or above 0.55 page by page and ranking them by probability.
 - [slop-grader](https://github.com/lukstei/slop-grader) - Content quality: CLI tool that grades text files against custom rulesets for AI slop, grammar, and technical doc quality using Jev scores and line-level flags, then guides an AI agent to auto-fix violations.
 - [jselect](https://github.com/keltokhy/jselect) - Research and retrieval: selects source-linked evidence within a token budget using Jev Noul relevance judgments and local diversity-aware selection.
 - [jsort](https://github.com/keltokhy/jsort) - Text measurement: ranks text along a plain-English criterion using pairwise Jev Noul comparisons and a locally fitted Bradley-Terry scale.
