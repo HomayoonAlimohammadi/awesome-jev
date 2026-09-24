@@ -119,6 +119,35 @@ resolve_round() {
   for f in $conflicted; do
     [ "$f" = "README.md" ] && continue
     git checkout --ours -- "$f" 2>/dev/null
+    # 改写类 PR（#203/#204/#201）：hunk 里有被删除的条目行。此时只把新行追加进去会留下
+    # 旧行，同一条目就出现两次。先在 --ours 上把旧行替换成新行，替换成功后下面的追加自然
+    # 不会再触发（新行已在文件里，grep 命中）。
+    if ! git diff --cached --quiet 2>/dev/null; then :; fi
+    gh pr diff "$n" 2>/dev/null > "/tmp/merge-prs-diff.$$"
+    python3 - "$f" "/tmp/merge-prs-diff.$$" <<'PYEDIT' || true
+import re, sys
+f, difffile = sys.argv[1], sys.argv[2]
+try:
+    diff = open(difffile, encoding="utf-8", errors="replace").read()
+except OSError:
+    sys.exit(0)
+old = new = None
+for b in re.split(r"^diff --git ", diff, flags=re.M):
+    if f not in b.split("\n", 1)[0]:
+        continue
+    for line in b.split("\n"):
+        if line.startswith("-- [") and not line.startswith("--- "):
+            old = line[2:]
+        elif line.startswith("+- [") and old is not None and new is None:
+            new = line[2:]
+    break
+if old and new:
+    t = open(f, encoding="utf-8").read()
+    if old in t and new not in t:
+        open(f, "w", encoding="utf-8").write(t.replace(old, new, 1))
+        print(f"  · 改写已应用: {f}")
+PYEDIT
+    rm -f "/tmp/merge-prs-diff.$$"
     added=$(added_line_for "$n" "$f")
     if printf '%s' "$added" | grep -q "img.shields.io"; then
       info "  ⚠ $f 取到的是 README 渲染行，已跳过（分类文件必须用源码标签形式）"
